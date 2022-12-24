@@ -1,7 +1,7 @@
 //get Job, get single job, create job, update job, delete job
 
 const getTasks = (req, res) => {
-    res.send('get tasks')
+    res.status(200).json(req.user);
 }
 
 const getTask = (req, res) => {
