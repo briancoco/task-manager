@@ -6,6 +6,12 @@ require('dotenv').config()
 const notFound = require('./middleware/not-found');
 const errorHandler = require('./middleware/error-handler');
 const authUser = require('./middleware/authentication');
+const cors = require('cors');
+
+//cors
+app.use(cors({
+    origin: 'http://localhost:3006'
+}))
 
 //routes
 const authRouter = require('./routes/auth');
