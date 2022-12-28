@@ -6,9 +6,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 .header {
   text-align: center;
+  color:chartreuse;
 }
 
 .footer {
@@ -18,22 +18,28 @@ body {
   text-align: center;
 }
 
-.login {
+.login, .register {
   display: flex;
   flex-direction: column;
   width: 20rem;
 }
-.login-wrapper {
+.login-wrapper, .register-wrapper {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
 }
-.login-btn {
+.login-btn, .register-btn {
   width: 5rem;
   align-self: center;
 }
 .login-invalid {
   color: rgb(202, 29, 29);
   text-align: center;
+}
+
+.register-link {
+  color: rgb(70, 70, 209)
 }
 
 #email, #password {
@@ -50,9 +56,31 @@ body {
   display: flex;
   justify-content: center;
   gap: 1rem;
-  width: 30rem;
   border: 2px solid black;
   border-radius: 1rem;
   margin-bottom: 1rem;
 
+}
+
+.create-wrapper {
+  display: flex;
+  justify-content: center;
+}
+.create-form {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  height: 300px;
+  padding: 25px;
+  border-radius: 10px;
+  border: 1px solid black;
+}
+
+#create-name, #create-descrip, #create-completed {
+  margin-bottom: 10px;
+}
+
+#create-descrip {
+  min-height: 150px;
+  max-width: 300px;
 }

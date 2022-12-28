@@ -17,6 +17,7 @@ const Feed = ({tasks, isLoading}) => {
       
       {!isLoading && tasks && tasks.length > 0 && <div className='feed-tasks'>{tasks.map((task) => <Tasks key={task._id} task={task}/>)}</div> }
       {!isLoading && tasks && tasks.length === 0 && <div>No tasks to be displayed</div>}
+      <Link to='/tasks/create'>Create task</Link>
     
     </div>
   )

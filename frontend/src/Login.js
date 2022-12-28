@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 const Login = ({handleLogin, email, setEmail, password, setPassword, validLogin}) => {
     //need an HTML form which will contain all the login details
@@ -38,6 +39,7 @@ const Login = ({handleLogin, email, setEmail, password, setPassword, validLogin}
             <button className='login-btn' type='submit'>Login</button>
 
         </form>
+        <Link to='/register' className='register-link'>New User? Register here</Link>
     </div>
     </>
   )

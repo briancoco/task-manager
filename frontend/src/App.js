@@ -5,17 +5,30 @@ import Feed from './Feed';
 import Task from './Task';
 import EditTask from './EditTask';
 import Missing from './Missing';
+import Register from './Register';
+import CreateTask from './CreateTask';
 import { useState, useEffect } from 'react';
-import { useNavigate, Link} from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 
 function App() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [registerEmail, setRegisterEmail] = useState('');
+  const [registerPassword, setRegisterPassword] = useState('');
   const [validLogin, setValidLogin] = useState(true);
+  const [validRegister, setValidRegister] = useState(true);
   const [tasks, setTasks] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [token, setToken] = useState(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if(token) {
+      setToken(token);
+      navigate('/tasks');
+    }
+  }, [])
 
   useEffect(() => {
     setIsLoading(true);
@@ -29,21 +42,51 @@ function App() {
     //and display the error, otherwise save the token in localStorage and navigate the user
     //to the tasks feed
     e.preventDefault();
-    let response = await fetch('http://localhost:3000/api/auth/login', {
+    try {
+      let response = await fetch('http://localhost:3000/api/auth/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({email, password})
-    });
-    if(response.ok){
+      });
+      if(response.ok){
+        response = await response.json();
+        localStorage.setItem('token', response.token);
+        setToken(response.token);
+        setValidLogin(true);
+        navigate('/tasks');
+      } else {
+        throw Error('Invalid Login. Try Again');
+      }
+    } catch (error) {
+      setValidLogin(false)
+    }
+
+  }
+
+  const handleRegister = async (e) => {
+    //need to call the register endpoint which is /api/auth/register using fetch api
+    //need to pass in json obj containing email and password
+    //if we get a 200 response, then we want to set the token in our state and we also want to add it to localStorage
+    //we then want to naviagate the user to the feed
+    e.preventDefault();
+    let response = await fetch('http://localhost:3000/api/auth/register', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({email: registerEmail, password: registerPassword})
+    })
+    console.log(response);
+    if(response.ok) {
       response = await response.json();
       localStorage.setItem('token', response.token);
       setToken(response.token);
-      setValidLogin(true);
+      setValidRegister(true);
       navigate('/tasks');
-    } else{
-      setValidLogin(false)
+    } else {
+      setValidRegister(false);
     }
 
   }
@@ -81,6 +124,14 @@ function App() {
             handleLogin={handleLogin}
             validLogin={validLogin}
           />} />
+          <Route path='register' element={<Register 
+            registerEmail={registerEmail}
+            setRegisterEmail={setRegisterEmail}
+            registerPassword={registerPassword}
+            setRegisterPassword={setRegisterPassword}
+            handleRegister={handleRegister}
+            validRegister={validRegister}
+          />} />
           <Route path='tasks'>
             <Route index element={<Feed 
               tasks={tasks}
@@ -88,6 +139,7 @@ function App() {
             />} />
             <Route path=':id' element={<Task />} />
             <Route path='edit/:id' element={<EditTask />} />
+            <Route path='create' element={<CreateTask />} />
           </Route>
           <Route path='*' element={<Missing />} />
         </Route>
