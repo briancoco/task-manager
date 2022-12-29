@@ -11,7 +11,7 @@ const Feed = ({tasks, isLoading}) => {
       {!isLoading && !tasks && 
         <div>
           <h5>Please try again</h5>
-          <Link to='/'>Login</Link>
+          <Link to='/login'>Login</Link>
         </div>
       }
       

@@ -7,6 +7,7 @@ import EditTask from './EditTask';
 import Missing from './Missing';
 import Register from './Register';
 import CreateTask from './CreateTask';
+import Home from './Home';
 import { useState, useEffect } from 'react';
 import { useNavigate} from 'react-router-dom';
 
@@ -26,7 +27,6 @@ function App() {
     const token = localStorage.getItem('token');
     if(token) {
       setToken(token);
-      navigate('/tasks');
     }
   }, [])
 
@@ -78,7 +78,6 @@ function App() {
       },
       body: JSON.stringify({email: registerEmail, password: registerPassword})
     })
-    console.log(response);
     if(response.ok) {
       response = await response.json();
       localStorage.setItem('token', response.token);
@@ -92,22 +91,21 @@ function App() {
   }
 
   const getTasks = async () => {
-    const token = localStorage.getItem('token');
-    let tasks = await fetch('http://localhost:3000/api/tasks', {
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    });
-    if(!tasks.ok) {
-      setIsLoading(false);
-    } else {
-      tasks = await tasks.json();
-      setTimeout(()=>{
-        console.log(tasks);
+    try {
+      const token = localStorage.getItem('token');
+      let tasks = await fetch('http://localhost:3000/api/tasks', {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      if(tasks.ok) {
+        tasks = await tasks.json();
         setTasks(tasks.tasks);
-        setIsLoading(false);
-      }, 2000);
+      }
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false)
     }
     
   }
@@ -116,7 +114,8 @@ function App() {
     <div className="App">
       <Routes>
         <Route path='/' element={<Layout />}>
-          <Route index element={<Login 
+          <Route index element={<Home />} />
+          <Route path='login' element={<Login 
             email={email}
             setEmail={setEmail}
             password={password}
@@ -139,7 +138,11 @@ function App() {
             />} />
             <Route path=':id' element={<Task />} />
             <Route path='edit/:id' element={<EditTask />} />
-            <Route path='create' element={<CreateTask />} />
+            <Route path='create' element={<CreateTask 
+              navigate={navigate}
+              setTasks={setTasks}
+              tasks={tasks}
+            />} />
           </Route>
           <Route path='*' element={<Missing />} />
         </Route>

@@ -1,8 +1,22 @@
 import React from 'react'
 import {Link} from 'react-router-dom';
+import {IconContext} from 'react-icons';
+import {BsFillPersonFill, BsFillInboxFill, BsFillPlusCircleFill} from 'react-icons/bs';
+import {FaKeybase} from 'react-icons/fa';
+
 const Header = () => {
   return (
-    <h1 className='header'><Link to='/' style={{color:'black', textDecoration:'none'}}>Task Manager</Link></h1>
+    <IconContext.Provider value={{color:"black", size: '2em'}}>
+    <div className='header'>
+      <Link to='/'><FaKeybase /></Link>
+      <nav className='navbar'>
+        <Link to='/tasks/create'><BsFillPlusCircleFill /></Link>
+        <Link to='/tasks'><BsFillInboxFill /></Link>
+        <Link to='/login'><BsFillPersonFill /></Link>
+      </nav>
+    </div>
+
+    </IconContext.Provider>
   )
 }
 
