@@ -5,6 +5,8 @@ const Register = ({handleRegister, registerEmail, setRegisterEmail, registerPass
     <>
     {!validRegister && <div className='login-invalid'>Invalid email/password. Try Again.</div>}
     <div className='register-wrapper'>
+      <div className='register-border'>
+        <h2>Register</h2>
         <form className='register' onSubmit={handleRegister}>
             <label htmlFor='email'>Email </label>
             <input 
@@ -25,10 +27,11 @@ const Register = ({handleRegister, registerEmail, setRegisterEmail, registerPass
                 value={registerPassword}
                 onChange={(e) => setRegisterPassword(e.target.value)}
             />
-            <button className='register-btn' type='submit'>Register</button>
+            <button className='register-btn button' type='submit'>Register</button>
 
         </form>
-        <Link to='/' className='register-link'>Back</Link>
+        </div>
+        <Link to='/login' className='register-link'>Back</Link>
     </div>
     </>
   )

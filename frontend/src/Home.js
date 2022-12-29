@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom';
 import {FaReact, FaNodeJs, FaServer} from 'react-icons/fa';
 import {DiMongodb} from 'react-icons/di';
 const Home = () => {
@@ -30,6 +31,7 @@ const Home = () => {
                 </ul>
             </div>
         </div>
+        <button className='button'><Link to='/login'>Try it out!</Link></button>
     </div>
   )
 }

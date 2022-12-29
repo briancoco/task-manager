@@ -16,7 +16,10 @@ const Login = ({handleLogin, email, setEmail, password, setPassword, validLogin}
         Invalid login! Try again.
     </div>}
     <div className='login-wrapper'>
+        <div className='login-border'>
+            <h2>Login</h2>
         <form className='login' onSubmit={handleLogin}>
+            <div className='login-input'>
             <label htmlFor='email'>Email </label>
             <input 
                 type='text'
@@ -26,7 +29,9 @@ const Login = ({handleLogin, email, setEmail, password, setPassword, validLogin}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
             />
+            </div>
 
+            <div className='login-input'>
             <label htmlFor='password'>Password </label>
             <input 
                 type='password'
@@ -36,9 +41,11 @@ const Login = ({handleLogin, email, setEmail, password, setPassword, validLogin}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
             />
-            <button className='login-btn' type='submit'>Login</button>
+            </div>
+            <button className='login-btn button' type='submit'>Submit</button>
 
         </form>
+        </div>
         <Link to='/register' className='register-link'>New User? Register here</Link>
     </div>
     </>

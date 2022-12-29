@@ -6,7 +6,7 @@ import {FaKeybase} from 'react-icons/fa';
 
 const Header = () => {
   return (
-    <IconContext.Provider value={{color:"black", size: '2em'}}>
+    <IconContext.Provider value={{color:"#0f172a", size: '2em'}}>
     <div className='header'>
       <Link to='/'><FaKeybase /></Link>
       <nav className='navbar'>
