@@ -57,17 +57,19 @@ li {
 .feed {
   display: flex;
   justify-content: center;
-  text-align: center;
+}
+
+.feed-tasks {
+  width: 45%;
 }
 
 .feed-task {
   display: flex;
-  justify-content: center;
-  gap: 1rem;
+  justify-content: space-between;
   border: 2px solid black;
   border-radius: 1rem;
   margin-bottom: 1rem;
-
+  padding: 0 1rem;
 }
 
 .create-wrapper {
@@ -124,4 +126,14 @@ ul {
 .list-header {
   font-size: 25px;
   margin: 0 0 10px 0;
+}
+
+.completed {
+  text-decoration: line-through;
+}
+
+.task-icons {
+  align-self: center;
+  display: flex;
+  gap: 1rem;
 }
