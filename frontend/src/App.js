@@ -132,8 +132,6 @@ function App() {
     } catch (error) {
       console.log(error.message);
     }
-    
-
   }
 
   return (
@@ -164,7 +162,12 @@ function App() {
               handleDelete={handleDelete}
             />} />
             <Route path=':id' element={<Task />} />
-            <Route path='edit/:id' element={<EditTask />} />
+            <Route path='edit/:id' element={<EditTask 
+              tasks={tasks}
+              setTasks={setTasks}
+              token={token}
+              navigate={navigate}
+            />} />
             <Route path='create' element={<CreateTask 
               navigate={navigate}
               setTasks={setTasks}
