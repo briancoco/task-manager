@@ -23,6 +23,7 @@ li {
 }
 a {
   text-decoration: none;
+  color:black;
 }
 .footer {
   width: 100%;
@@ -88,6 +89,7 @@ a {
 }
 
 .feed-task {
+  background-color: white;
   display: flex;
   justify-content: space-between;
   border: 2px solid black;
@@ -176,4 +178,9 @@ ul {
 
 .button a {
   color: #f8fafc 
+}
+
+.icon-btn {
+  border: none;
+  background-color: white;
 }

@@ -3,6 +3,7 @@ const CustomAPIError = require('../errors/custom-error');
 require('express-async-errors');
 const bcrypt = require('bcryptjs');
 const User = require('../models/user');
+
 const register = async (req, res) => {
     //we want to validate our user's input using mongoose validation
     //if it's valid then we want to hash our password and then store it inside our database

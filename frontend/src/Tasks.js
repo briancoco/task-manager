@@ -1,6 +1,7 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import {BsCheckCircleFill, BsCheckCircle, BsPencilFill, BsFillTrashFill} from 'react-icons/bs'
-const Tasks = ({task}) => {
+const Tasks = ({task, handleDelete}) => {
   return (
     <div className='feed-task'>
       <div className='task-descrip'>
@@ -9,8 +10,8 @@ const Tasks = ({task}) => {
       </div>
       <div className='task-icons'>
         {task.completed ? <BsCheckCircleFill /> : <BsCheckCircle />}
-        <BsPencilFill />
-        <BsFillTrashFill />
+        <Link to={`/tasks/edit/${task._id}`}><BsPencilFill /></Link>
+        <button className='icon-btn' type='button' onClick={(e) => handleDelete(e, task._id)}><BsFillTrashFill /></button>
       </div>
     </div>
   )

@@ -5,6 +5,11 @@ const taskSchema = mongoose.Schema({
     //completed
     //createdBy
     //date(we can get this using mongoose)
+    name: {
+        type: String,
+        required: [true, 'must provide task name'],
+        minlength: 1
+    },
     description: {
         type: String,
         required: [true, 'must provide task description'],
