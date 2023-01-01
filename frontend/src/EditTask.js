@@ -38,18 +38,20 @@ const EditTask = ({tasks, setTasks, token, navigate}) => {
   //find the task associated with this id and set the state for our states
   return (
     <div className='login-wrapper'>
-      <div className='login-border'>
-        <form className='create-form' onSubmit={handleEdit}>
+      <div className='edit-border'>
+        <h2>Edit</h2>
+        <form className='edit-form' onSubmit={handleEdit}>
           <label htmlFor='edit-name'>Name</label>
           <input id='edit-name' type='text' value={editName} onChange={(e) => setEditName(e.target.value)} required></input>
 
           <label htmlFor='edit-descrip'>Description</label>
           <textarea id='edit-descrip' required value={editDescrip} onChange={(e) => setEditDescrip(e.target.value)}></textarea>
 
+          <div>
           <label htmlFor='edit-completed'>Completed</label>
           <input id='edit-completed' type='checkbox' checked={editCompleted} onChange={() =>setEditCompleted(!editCompleted)}></input>
-
-          <button type='submit'>Submit</button>
+          </div>
+          <button className='login-btn button edit-submit' type='submit'>Submit</button>
         </form>
       </div>
     </div>

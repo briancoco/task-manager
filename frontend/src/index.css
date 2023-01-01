@@ -42,7 +42,6 @@ a {
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  height: 100vh;
 }
 .login-border, .register-border {
   display:flex;
@@ -72,7 +71,7 @@ a {
   color: rgb(70, 70, 209)
 }
 
-#email, #password {
+#email, #password, #edit-name, #edit-descrip, #create-name, #create-descrip {
   margin-bottom: 1rem;
   padding: 5px;
   border-radius: 5px;
@@ -84,18 +83,14 @@ a {
   justify-content: center;
 }
 
-.feed-tasks {
-  width: 45%;
-}
-
 .feed-task {
   background-color: white;
   display: flex;
   justify-content: space-between;
-  border: 2px solid black;
-  border-radius: 1rem;
+  box-shadow: -2.5px 2.5px 10px  grey;
   margin-bottom: 1rem;
   padding: 0 1rem;
+  width: 500px;
 }
 
 .create-wrapper {
@@ -112,13 +107,8 @@ a {
   border: 1px solid black;
 }
 
-#create-name, #create-descrip, #create-completed {
+#create-name, #create-descrip {
   margin-bottom: 10px;
-}
-
-#create-descrip {
-  min-height: 150px;
-  max-width: 300px;
 }
 
 .create-submit {
@@ -183,4 +173,35 @@ ul {
 .icon-btn {
   border: none;
   background-color: white;
+}
+
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  height: 300px;
+}
+#edit-name, #edit-descrip {
+  margin-bottom: 10px;
+}
+#edit-descrip, #create-descrip {
+  max-height:100px;
+  max-width: 300px;
+  min-height:100px;
+  min-width: 300px;
+}
+.edit-border {
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  width: 400px;
+  height: 350px;
+  margin-top: 50px;
+  box-shadow: -2.5px 2.5px 10px  grey;
+}
+
+.edit-submit {
+  margin-bottom: 0.83em;
 }

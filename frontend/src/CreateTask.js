@@ -35,8 +35,10 @@ const CreateTask = ({ navigate, setTasks, tasks}) => {
     <>
     {!validTask && <div className='login-invalid'>Error, try again.</div>}
     
-    <div className='create-wrapper'>
-        <form className='create-form' onSubmit={handleCreate}>
+    <div className='login-wrapper'>
+      <div className='edit-border'>
+        <h2>Create</h2>
+        <form className='edit-form' onSubmit={handleCreate}>
             
             <label htmlFor='create-name'>Name</label>
             <input type='text' id='create-name' value={name} onChange={(e) => setName(e.target.value)} required></input>
@@ -49,9 +51,10 @@ const CreateTask = ({ navigate, setTasks, tasks}) => {
               <label htmlFor='create-completed'>Completed</label>
               <input type='checkbox' id='create-completed' name='completed' value={completed} onClick={() =>setCompleted(!completed)}></input>
             </div>
-            <button className='create-submit' type='submit'>Create</button>
+            <button className='login-btn button create-submit' type='submit'>Create</button>
 
         </form>
+      </div>
     </div>
     </>
   )
