@@ -22,6 +22,26 @@ function App() {
   }, [])
 
   useEffect(() => {
+
+    const getTasks = async () => {
+      try {
+        let tasks = await fetch('http://localhost:3000/api/tasks', {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        if(tasks.ok) {
+          tasks = await tasks.json();
+          setTasks(tasks.tasks);
+        }
+        setIsLoading(false);
+      } catch (error) {
+        setIsLoading(false)
+      }
+      
+    }
+
     setTasks(null);
     if(token) {
       setIsLoading(true);
@@ -30,26 +50,6 @@ function App() {
       setIsLoading(false);
     }
   }, [token])
-
-  const getTasks = async () => {
-    try {
-      const token = localStorage.getItem('token');
-      let tasks = await fetch('http://localhost:3000/api/tasks', {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
-      if(tasks.ok) {
-        tasks = await tasks.json();
-        setTasks(tasks.tasks);
-      }
-      setIsLoading(false);
-    } catch (error) {
-      setIsLoading(false)
-    }
-    
-  }
 
   return (
     <div className="App">
@@ -71,7 +71,9 @@ function App() {
               isLoading={isLoading}
               token={token}
             />} />
-            <Route path=':id' element={<Task />} />
+            <Route path=':id' element={<Task 
+              tasks={tasks}
+            />} />
             <Route path='edit/:id' element={<EditTask 
               tasks={tasks}
               setTasks={setTasks}

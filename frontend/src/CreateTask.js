@@ -4,36 +4,46 @@ const CreateTask = ({ navigate, setTasks, tasks}) => {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [completed, setCompleted] = useState(false);
-    const [validTask, setValidTask] = useState(true);
+    const [error, setError] = useState(null);
 
     const handleCreate = async (e) => {
       e.preventDefault();
-      const token = localStorage.getItem('token');
-      let response = await fetch('http://localhost:3000/api/tasks', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization:`Bearer ${token}`
-        },
-        body: JSON.stringify({name, description, completed})
-      });
-
-      if(response.ok) {
-        response = await response.json();
-        if(tasks) {
-          setTasks([...tasks, response.task]);
-        } else {
-          setTasks([response.task]);
+      try {
+        const token = localStorage.getItem('token');
+        if(!token) {
+          throw new Error('Please login first!');
         }
-        navigate('/tasks')
-      } else {
-        setValidTask(false);
+        let response = await fetch('http://localhost:3000/api/tasks', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization:`Bearer ${token}`
+          },
+          body: JSON.stringify({name, description, completed})
+        });
+
+        if(response.ok) {
+          response = await response.json();
+          if(tasks) {
+            setTasks([...tasks, response.task]);
+          } else {
+            setTasks([response.task]);
+          }
+          setError(null);
+          navigate('/tasks')
+        } else {
+          throw Error('Error, try again');
+        }
+      } catch (error) {
+        console.log(error.message);
+        setError(error.message);
       }
+      
     }
 
   return (
     <>
-    {!validTask && <div className='login-invalid'>Error, try again.</div>}
+    {error && <div className='login-invalid'>{error}</div>}
     
     <div className='login-wrapper'>
       <div className='edit-border'>

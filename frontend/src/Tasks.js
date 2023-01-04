@@ -28,7 +28,7 @@ const Tasks = ({tasks, task, setTasks, token}) => {
   return (
     <div className='feed-task'>
       <div className='task-descrip'>
-        <h3>{task.name.length <= 25 ? task.name : task.name.substring(0, 25) + '...'}</h3>
+        <Link to={`/tasks/${task._id}`}><h3>{task.name.length <= 25 ? task.name : task.name.substring(0, 25) + '...'}</h3></Link>
         <p>{task.description.length <= 25 ? task.description : task.description.substring(0, 25) + '...'}</p>
       </div>
       <div className='task-icons'>

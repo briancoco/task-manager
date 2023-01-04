@@ -9,9 +9,9 @@ const Feed = ({tasks, isLoading, setTasks, token}) => {
     <div className='feed'>
       {isLoading && <div>Loading...</div>}
       {!isLoading && !tasks && 
-        <div>
+        <div style={{textAlign:'center'}}>
           <h5>Please try again</h5>
-          <Link to='/login'>Login</Link>
+          <Link to='/login' style={{color:'#645cff', textDecorationLine: 'underline'}}>Login</Link>
         </div>
       }
       

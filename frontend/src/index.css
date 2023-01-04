@@ -205,3 +205,14 @@ ul {
 .edit-submit {
   margin-bottom: 0.83em;
 }
+
+.task {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin:auto;
+  padding: 20px;
+  width: 300px;
+  height: 280px;
+  box-shadow: -2.5px 2.5px 10px  grey;
+}

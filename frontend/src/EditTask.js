@@ -5,10 +5,11 @@ const EditTask = ({tasks, setTasks, token, navigate}) => {
   //consist of a form in which the user can edit what they want about their post
   //when they submit it will call the handleEdit() function which will call a patch
   const {id} = useParams();
-  const task = tasks.find((task) => task._id === id);
-  const [editName, setEditName] = useState(task.name);
-  const [editDescrip, setEditDescrip] = useState(task.description);
-  const [editCompleted, setEditCompleted] = useState(task.completed);
+  const task = tasks ? tasks.find((task) => task._id === id) : null;
+  const [editName, setEditName] = useState(task ? task.name : '');
+  const [editDescrip, setEditDescrip] = useState(task ? task.description : '');
+  const [editCompleted, setEditCompleted] = useState(task ? task.completed: '');
+  const [error, setError] = useState(task ? null : 'Task not found.');
 
   const handleEdit = async (e) => {
     //call patch req to backend api
@@ -27,17 +28,21 @@ const EditTask = ({tasks, setTasks, token, navigate}) => {
       });
       if(response.ok) {
         const newTasks = tasks.map((task) => task._id === id ? {...task, name: editName, description: editDescrip, completed: editCompleted} : task);
-        setTasks(newTasks)
-        navigate('/tasks')
+        setTasks(newTasks);
+        setError(null);
+        navigate('/tasks');
+      } else {
+        throw new Error('Failed to edit task, try again.');
       }
     } catch (error) {
-      console.log(error);
+      setError(error.message);
     }
   }
   
   //find the task associated with this id and set the state for our states
   return (
     <div className='login-wrapper'>
+      {error && <div className='login-invalid'>{error}</div>}
       <div className='edit-border'>
         <h2>Edit</h2>
         <form className='edit-form' onSubmit={handleEdit}>
